@@ -3,7 +3,6 @@
 import sys
 import Image
 import numpy as np
-import matplotlib.pyplot as plt
 
 def PIL_to_numpy(img_PIL):
     return np.array(img_PIL.getdata()).reshape(img_PIL.size[::-1])
@@ -25,12 +24,13 @@ def get_line_limits(img):
     return limits
 
 def mean_image(img, limits):
-    m_img = 255*np.ones(img.shape)
+    m_img = 255*np.ones(img.shape, dtype=np.uint8)
     even_indexes = 2*np.array(range(len(limits)/2 + 1))
     for i in even_indexes:
         try:
-            m_img[limits[i]:limits[i+1]] = np.mean(img[limits[i]:limits[i+1]])
-            #print limits[i], limits[i+1], np.mean(img[limits[i]:limits[i+1]])
+            mean = np.uint8(np.mean(img[limits[i]:limits[i+1]]))
+            m_img[limits[i]:limits[i+1]] = mean
+            #print limits[i], limits[i+1], mean
         except IndexError:
             pass
     return m_img
@@ -48,14 +48,5 @@ if __name__== "__main__":
     img = PIL_to_numpy(img_PIL)
     limits = get_line_limits(img)
     m_img = mean_image(img, limits)
-
-    cbar = (np.min([ x for x in m_img.flatten() if x > 0]),
-            np.max(m_img))
-
-    plt.axis('off')
-
-    fig = plt.imshow(m_img, cmap='gray', vmin=cbar[0], vmax=cbar[1])
-    plt.savefig('mean_' + sys.argv[1], bbox_inches='tight')
-
-    fig = plt.imshow(img, cmap='gray', vmin=cbar[0], vmax=cbar[1])
-    plt.savefig('orig_' + sys.argv[1], bbox_inches='tight')
+    m_img_PIL = Image.fromarray(m_img)
+    m_img_PIL.save('mean_' + sys.argv[1])
