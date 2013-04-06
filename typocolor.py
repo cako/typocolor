@@ -9,7 +9,7 @@ def PIL_to_numpy(img_PIL):
     return np.array(img_PIL.getdata()).reshape(img_PIL.size[::-1])
 
 def get_line_limits(img):
-    nonwhite = np.array([])
+    nonwhite = np.array([], dtype=np.int32)
     for i, line in enumerate(img):
         if min(line) < 125:
             nonwhite = np.append(nonwhite, i)
