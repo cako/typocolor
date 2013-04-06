@@ -53,12 +53,12 @@ if __name__== "__main__":
             np.max(m_img))
 
     fig = plt.figure()
-    axs = plt.figure().add_subplot(1,1,1)
+    axs = fig.add_subplot(1,1,1)
     axs.imshow(m_img, cmap='gray', vmin=cbar[0], vmax=cbar[1])
     plt.savefig('mean_' + sys.argv[1])
 
     fig = plt.figure()
-    axs = plt.figure().add_subplot(1,1,1)
+    axs = fig.add_subplot(1,1,1)
     axs.imshow(img, cmap='gray', vmin=cbar[0], vmax=cbar[1])
     plt.savefig('orig_' + sys.argv[1])
 
