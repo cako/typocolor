@@ -40,7 +40,7 @@ if __name__== "__main__":
     try:
         img_PIL = Image.open(sys.argv[1])
     except IOError as e:
-        print 'Trouble reading the PDF. Error(%d): %s' % (e.errno, e.strerror)
+        print 'Trouble reading the image. Error(%d): %s' % (e.errno, e.strerror)
         sys.exit(e.errno)
     except IndexError as e:
         print 'Must provide a filename as an argument.'
