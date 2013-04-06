@@ -52,13 +52,10 @@ if __name__== "__main__":
     cbar = (np.min([ x for x in m_img.flatten() if x > 0]),
             np.max(m_img))
 
-    fig = plt.figure()
-    axs = fig.add_subplot(1,1,1)
-    axs.imshow(m_img, cmap='gray', vmin=cbar[0], vmax=cbar[1])
-    plt.savefig('mean_' + sys.argv[1])
+    plt.axis('off')
 
-    fig = plt.figure()
-    axs = fig.add_subplot(1,1,1)
-    axs.imshow(img, cmap='gray', vmin=cbar[0], vmax=cbar[1])
-    plt.savefig('orig_' + sys.argv[1])
+    fig = plt.imshow(m_img, cmap='gray', vmin=cbar[0], vmax=cbar[1])
+    plt.savefig('mean_' + sys.argv[1], bbox_inches='tight')
 
+    fig = plt.imshow(img, cmap='gray', vmin=cbar[0], vmax=cbar[1])
+    plt.savefig('orig_' + sys.argv[1], bbox_inches='tight')
