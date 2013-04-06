@@ -5,8 +5,8 @@ import Image
 import numpy as np
 import matplotlib.pyplot as plt
 
-def PIL_to_numpy(img):
-    return np.array(img.getdata()).reshape(img.size[::-1])
+def PIL_to_numpy(img_PIL):
+    return np.array(img_PIL.getdata()).reshape(img_PIL.size[::-1])
 
 def get_line_limits(img):
     nonwhite = np.array([])
